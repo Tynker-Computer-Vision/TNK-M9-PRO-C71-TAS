@@ -25,6 +25,9 @@ detector = HandDetector(detectionCon=0.8)
 # Flag variable for item selected from the filters menu
 menuChoice = -1
 
+# Flag variable to show if we are dragging an image or not
+isImageSelected = False
+
 while True:
     success, cameraFeedImg = cap.read()
     cameraFeedImg = cv2.flip(cameraFeedImg, 1)
@@ -55,6 +58,7 @@ while True:
                         isImageSelected = True 
                         break
                     i = i+1
+            print(menuChoice, isImageSelected)
 
            
     except Exception as e:
