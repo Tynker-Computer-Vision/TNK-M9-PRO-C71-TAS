@@ -21,10 +21,9 @@ for pathImg in pathList:
 menuCount = len(menuImages)
 
 detector = HandDetector(detectionCon=0.8)
-menuChoice = -1
 
-# Flag variable to show if we are dragging an image or mot
-isImageSelected = False
+# Flag variable for item selected from the filters menu
+menuChoice = -1
 
 while True:
     success, cameraFeedImg = cap.read()
@@ -46,23 +45,18 @@ while True:
             indexFingerTop = lmList1[8]
             indexFingerBottom = lmList1[6]
 
+            # Find which image is selected by the pointer finger
             if (indexFingerTop[1] < xIncrement):
                 i = 0
                 while (xIncrement*i <= wWidth):
                     if (indexFingerTop[0] < xIncrement*i):
                         menuChoice = i-1
-                        isImageSelected = True
+                        # Set isImageSelected flag variable to true to show that image can be dragged now
+                        isImageSelected = True 
                         break
                     i = i+1
 
-            # Stop dragging
-            if (indexFingerTop[1] > indexFingerBottom[1]):
-                isImageSelected = False
-
-         # Drag the selected image
-        if (isImageSelected):
-            image = cv2.resize(menuImages[menuChoice], (100, 100))
-            cameraFeedImg = cvzone.overlayPNG(cameraFeedImg, image, [int(indexFingerTop[0]), int(indexFingerTop[1])])
+           
     except Exception as e:
         print(e)
 
