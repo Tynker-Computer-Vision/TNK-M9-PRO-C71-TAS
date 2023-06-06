@@ -58,6 +58,8 @@ while True:
                         isImageSelected = True 
                         break
                     i = i+1
+
+            # Print the menuChoice and isImageSelected to check whether a filter selected or not
             print(menuChoice, isImageSelected)
 
            
